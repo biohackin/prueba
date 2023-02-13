@@ -15,5 +15,5 @@ jobs:
       - name: Run python
         run: python3 bot.py
         env:
-          TELEGRAM_TOKEN: ${{ secrets.API_TOKEN }}
+          API_TOKEN: ${{ secrets.API_TOKEN }}
           #TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID  }}
