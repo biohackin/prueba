@@ -1,6 +1,5 @@
-# Para que nuestro bot acepte peticiones inline
-# Activar /setinline en @botfhater y select nuestro bot
-# y enviar cual sera el placeholder
+# Para que 1bot acepte peticiones inline set:
+# /setinline y set placeholder in @botfhater
 # pip install pyTelegramBotAPI
 
 import os, sys, time, logging
