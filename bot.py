@@ -4,6 +4,12 @@
 # pip3 install pyTelegramBotAPI
 
 import os, sys, time, logging
+
+try:
+    import telebot
+except:
+    os.system("pip3 install pyTelegramBotAPI")
+
 import telebot
 from telebot import types
 
