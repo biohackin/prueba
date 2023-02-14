@@ -1,10 +1,12 @@
 name: "Github Actions Pragmatic Programmer Bot"
 
+#Iniciar automáticamente
 #on:
 #  push:
 #  schedule:
 #    - cron: '0 07 * * *'
 
+#Iniciar manualmente
 on:
   workflow_dispatch:
   pull_request:
@@ -16,10 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      #- uses: actions/setup-node@v1
       - run: pip3 install -r requirements.txt
       - name: Run python
         run: python3 bot.py
         env:
           API_TOKEN: ${{ secrets.API_TOKEN }}
-          #TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID  }}
