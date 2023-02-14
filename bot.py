@@ -2,24 +2,14 @@
 # Activar /setinline en @botfhater y select nuestro bot
 # y enviar cual sera el placeholder
 
-# This example show how to write an inline mode telegram bot use pyTelegramBotAPI.
 import os, sys, time, logging
-
-#pip install pyTelegramBotAPI
-
-try:
-    import telebot
-except:
-    os.system("pip3 install pyTelegramBotAPI")
-
-import telebot
+import telebot    #pip install pyTelegramBotAPI
 from telebot import types
 
 API_TOKEN = os.getenv("API_TOKEN", "")
 
 bot = telebot.TeleBot(API_TOKEN)
 telebot.logger.setLevel(logging.DEBUG)
-
 
 @bot.inline_handler(lambda query: query.query == 'text')
 def query_text(inline_query):
@@ -29,7 +19,6 @@ def query_text(inline_query):
         bot.answer_inline_query(inline_query.id, [r, r2])
     except Exception as e:
         print(e)
-
 
 @bot.inline_handler(lambda query: query.query == 'photo1')
 def query_photo(inline_query):
@@ -45,7 +34,6 @@ def query_photo(inline_query):
     except Exception as e:
         print(e)
 
-
 @bot.inline_handler(lambda query: query.query == 'video')
 def query_video(inline_query):
     try:
@@ -59,7 +47,6 @@ def query_video(inline_query):
     except Exception as e:
         print(e)
 
-
 @bot.inline_handler(lambda query: len(query.query) == 0)
 def default_query(inline_query):
     try:
@@ -68,12 +55,10 @@ def default_query(inline_query):
     except Exception as e:
         print(e)
 
-
 def main_loop():
     bot.infinity_polling()
     while 1:
         time.sleep(3)
-
 
 if __name__ == '__main__':
     try:
