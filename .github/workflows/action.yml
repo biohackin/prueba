@@ -1,12 +1,14 @@
+# Github Action SimplyTheBest
+
 name: "Pragmatic Programmer Bot"
 
-#Iniciar automáticamente
+# Iniciar automáticamente
 #on:
 #  push:
 #  schedule:
 #    - cron: '0 07 * * *'
 
-#Iniciar manualmente
+# Iniciar manualmente
 on:
   workflow_dispatch:
   pull_request:
