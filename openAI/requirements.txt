@@ -1,5 +1,0 @@
-openai==0.26.5
-prompt_toolkit==3.0.36
-Pygments==2.13.0
-requests==2.28.1
-termuxgui==0.1.5
