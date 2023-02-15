@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+#-*- coding: UTF-8 -*-
+
+""" Usage...: ./OpenAI
+    Author..: @SimplyTheBest - 15/02/23
+"""
+from os.path import expanduser
+from pygments import highlight
+from pygments.lexers import PythonLexer
+from pygments.formatters import TerminalFormatter
+from prompt_toolkit import prompt
+from prompt_toolkit import PromptSession
+from prompt_toolkit.history import FileHistory
+import os, io, re, time, pathlib, termuxgui, requests, openai
+
+openai.api_key = os.getenv("OPENAI_API_KEY", "")
+message = lambda msg: print("[1;30m%s[m"%msg)
+user = lambda: print("[1;30m%s:[m"%os.getenv("USER"), end=" ")
+size, imgf, tsee, hist = "512x512", "img.png", 5, "/data/data/com.termux/files/usr/tmp/.chatgpt_history"
+
+def main():
+    while True:
+        prompt = PromptSession(history=FileHistory(expanduser(hist))).prompt(user())
+        if re.match(r'exit|bye|goodbye|salir|adios', prompt, re.I) is not None: break
+        elif re.match(r'^dame la imagen de', prompt, re.I) is not None:
+            print("\n[1;36mDall-E.:[m Espera un momento porfavor.\n")
+            generation = openai.Image.create(n=1,prompt=prompt[18:],size=size)
+            image = requests.get(generation['data'][0]['url']).content
+            with open(imgf, 'wb') as handler: handler.write(image)
+            with io.open(imgf, "rb") as file: image = file.read()
+            with termuxgui.Connection() as c:
+                iv = termuxgui.ImageView(termuxgui.Activity(c, pip=True))
+                iv.setimage(image), time.sleep(tsee)
+            pathlib.Path(imgf).unlink(missing_ok=True)
+        else:
+            completion = openai.Completion.create(engine="text-davinci-003",top_p=1.0,max_tokens=2048,
+                         prompt=prompt,frequency_penalty=0.0,temperature=0.5,presence_penalty=0.0)
+            lightResponse = highlight(completion.choices[0].text, PythonLexer(), TerminalFormatter())
+            print("\n[1;31mchatGPT:[m "+lightResponse)
+
+if __name__ == "__main__":
+    try: message("Welcome to OpenAI!\n"), main(), message("\nGoodbye!")
+    except (KeyboardInterrupt, EOFError): message("\nProgram ended by user!")
+    except Exception as msg: exit(str(msg))
+
+
