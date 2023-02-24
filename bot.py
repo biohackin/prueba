@@ -6,7 +6,7 @@ import os, sys, time, logging
 import telebot
 from telebot import types
 
-API_TOKEN = os.getenv("API_TOKEN", "6027855393:AAH0dkgxRs69vseQenA3XB7-Swp6nEg-ZIk")
+API_TOKEN = os.getenv("API_TOKEN", "")
 
 bot = telebot.TeleBot(API_TOKEN)
 telebot.logger.setLevel(logging.DEBUG)
