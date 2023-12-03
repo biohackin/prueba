@@ -19,7 +19,7 @@ jobs:
   
     - name: Filling in home...
       #run: tar -czfv  i-haklab-homa.tar.gz  ../../.deb/i-haklab/home 
-      run: tar -czfv  i-haklab-homa.tar.gz  . 
+      run: tar czfv i-haklab-homa.tar.gz *
 
     - name: Uploading...
       uses: actions/upload-artifact@v3
